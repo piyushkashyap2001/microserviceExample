@@ -19,7 +19,7 @@ export default class EditCustomer extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5555/customer/' + this.props.match.params.id)
+    axios.get(process.env.CUSTOMERSERVICE + '/customer/' + this.props.match.params.id)
       .then(response => {
         this.setState({
           customername: response.data.name,
@@ -65,7 +65,7 @@ export default class EditCustomer extends Component {
 
     console.log(customer);
 
-    axios.put('http://localhost:5555/customer/' + this.props.match.params.id, customer)
+    axios.put(process.env.CUSTOMERSERVICE + '/customer/' + this.props.match.params.id, customer)
       .then(res => console.log(res.data));
 
     window.location = '/customer';

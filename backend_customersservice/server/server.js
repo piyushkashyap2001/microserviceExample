@@ -9,10 +9,30 @@ app.use(bodyParser.json());
 //connect
 require('./Customer');
 const Customer = mongoose.model('Customer');
-mongoose.connect('mongodb://localhost:27017/customers', () => {
-    console.log('Database connected-  Customer service');
-});
 
+const dbURI =
+    'mongodb://' +
+    process.env.USER_NAME +
+    ':' +
+    process.env.PASSWORD +
+    '@' +
+    process.env.MONGO_HOST +
+    ':' +
+    process.env.MONGO_PORT +
+    '/' +
+    process.env.DB_NAME;
+
+mongoose.connect(dbURI, (err) => {
+    if (err) {
+        console.log('Error connecting to mongoDB: ' + err, {
+            'component': 'MONGODB'
+        });
+    } else {
+        console.log('Connected to mongoDB successfully: ' + dbURI, {
+            'component': 'MONGODB'
+        });
+    }
+});
 app.post('/customer', (req, res) => {
     var newCustomer = {
         name: req.body.name,
@@ -72,6 +92,10 @@ app.put('/customer/:id', (req, res) => {
     });
 });
 
-app.listen('5555', () => {
+app.get("/healthcheck", (req, res) => {
+    res.send(200);
+});
+
+app.listen('5000', () => {
     console.log('Up and running - Customer service');
 });

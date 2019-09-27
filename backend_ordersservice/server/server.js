@@ -7,8 +7,28 @@ const axios = require('axios');
 
 app.use(cors());
 app.use(bodyParser.json());
-mongoose.connect('mongodb://localhost:27017/orders', () => {
-    console.log('Database connected - Orders service');
+const dbURI =
+    'mongodb://' +
+    process.env.USER_NAME +
+    ':' +
+    process.env.PASSWORD +
+    '@' +
+    process.env.MONGO_HOST +
+    ':' +
+    process.env.MONGO_PORT +
+    '/' +
+    process.env.DB_NAME;
+
+mongoose.connect(dbURI, (err) => {
+    if (err) {
+        console.log('Error connecting to mongoDB: ' + err, {
+            'component': 'MONGODB'
+        });
+    } else {
+        console.log('Connected to mongoDB successfully: ' + dbURI, {
+            'component': 'MONGODB'
+        });
+    }
 });
 
 require('./Order')
@@ -84,7 +104,10 @@ app.put('/order/:id', (req, res) => {
     });
 });
 
+app.get("/healthcheck", (req, res) => {
+    res.send(200);
+});
 
-app.listen(7777, () => {
+app.listen(6000, () => {
     console.log('up and running - Orders service');
 });

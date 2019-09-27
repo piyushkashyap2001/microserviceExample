@@ -9,8 +9,29 @@ app.use(bodyParser.json());
 //connect
 require('./Book');
 const Book = mongoose.model('Book');
-mongoose.connect('mongodb://localhost:27017/books', () => {
-    console.log('database is connected');
+
+const dbURI =
+    'mongodb://' +
+    process.env.USER_NAME +
+    ':' +
+    process.env.PASSWORD +
+    '@' +
+    process.env.MONGO_HOST +
+    ':' +
+    process.env.MONGO_PORT +
+    '/' +
+    process.env.DB_NAME;
+//'mongodb://username:password@localhost:27017/books'    
+mongoose.connect(dbURI, (err) => {
+    if (err) {
+        console.log('Error connecting to mongoDB: ' + err, {
+            'component': 'MONGODB'
+        });
+    } else {
+        console.log('Connected to mongoDB successfully: ' + dbURI, {
+            'component': 'MONGODB'
+        });
+    }
 });
 
 app.get('/', (req, res) => {
@@ -79,6 +100,10 @@ app.put('/book/:id', (req, res) => {
     });
 });
 
-app.listen(4545, () => {
+app.get("/healthcheck", (req, res) => {
+    res.send(200);
+});
+
+app.listen(4000, () => {
     console.log("up and running ! -- THis is book service");
 });

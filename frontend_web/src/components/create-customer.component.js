@@ -44,7 +44,7 @@ export default class CreateCustomer extends Component {
 
     console.log(customer);
 
-    axios.post('http://localhost:5555/customer/', customer)
+    axios.post(process.env.CUSTOMERSERVICE + '/customer/', customer)
       .then(res => console.log(res.data));
 
     this.setState({

@@ -24,7 +24,7 @@ export default class EditOrder extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:7777/order/' + this.props.match.params.id)
+    axios.get(process.env.ORDERSERVICE + '/order/' + this.props.match.params.id)
       .then(response => {
         this.setState({
           customername: response.data.customerName,
@@ -37,7 +37,7 @@ export default class EditOrder extends Component {
         console.log(error);
       })
 
-    axios.get('http://localhost:5555/customers/')
+    axios.get(process.env.CUSTOMERSERVICE + '/customers/')
       .then(response => {
         if (response.data.length > 0) {
           this.setState({
@@ -49,7 +49,7 @@ export default class EditOrder extends Component {
         console.log(error);
       })
 
-    axios.get('http://localhost:4545/books/')
+    axios.get(process.env.BOOKSERVICE + '/books/')
       .then(response => {
         if (response.data.length > 0) {
           this.setState({
@@ -100,7 +100,7 @@ export default class EditOrder extends Component {
 
     console.log('this is updated order' + order);
 
-    axios.put('http://localhost:7777/order/' + this.props.match.params.id, order)
+    axios.put(process.env.ORDERSERVICE + '/order/' + this.props.match.params.id, order)
       .then(res => console.log(res.data));
 
     window.location = '/';

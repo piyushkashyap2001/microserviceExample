@@ -23,7 +23,7 @@ export default class CustomerList extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5555/customers/')
+    axios.get(process.env.CUSTOMERSERVICE + '/customers/')
       .then(response => {
         this.setState({ customers: response.data })
       })
@@ -33,7 +33,7 @@ export default class CustomerList extends Component {
   }
 
   deleteCustomer(id) {
-    axios.delete('http://localhost:5555/customer/' + id)
+    axios.delete(process.env.CUSTOMERSERVICE + '/customer/' + id)
       .then(response => { console.log(response.data) });
 
     this.setState({

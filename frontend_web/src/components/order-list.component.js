@@ -22,19 +22,20 @@ export default class OrderList extends Component {
 
     this.state = { orders: [] };
   }
-
-  componentDidMount() {
-    axios.get('http://localhost:7777/orders/')
+  //'http://localhost:6000/orders/
+  //process.env.ORDERSERVICE + '/orders/'
+  componentWillMount() {
+    axios.get('http://localhost:6000/orders/')
       .then(response => {
         this.setState({ orders: response.data })
       })
       .catch((error) => {
-        console.log(error);
+        this.setState = { orders: [] };
       })
   }
 
   deleteOrder(id) {
-    axios.delete('http://localhost:7777/order/' + id)
+    axios.delete(process.env.ORDERSERVICE + '/order/' + id)
       .then(response => { console.log(response.data) });
 
     this.setState({

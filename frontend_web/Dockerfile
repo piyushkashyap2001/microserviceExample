@@ -1,9 +1,9 @@
 FROM nginx:alpine
 
-WORKDIR /client/frontend-web-bot
+WORKDIR /client/frontend-web
 
-COPY ./dist /client/frontend-web-bot
+COPY ./build /client/frontend-web
 
 COPY default.conf /etc/nginx/conf.d/default.conf
 
-EXPOSE 3000
+EXPOSE 7000

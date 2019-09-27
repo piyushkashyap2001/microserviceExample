@@ -2,9 +2,11 @@
 
 # dependencies
 /node_modules
-/backend_booksservice/node_modules
-/backend_customersservice/node_modules
-/backend_ordersservice/node_modules
+/backend_booksservice/server/node_modules
+/backend_customersservice/server/node_modules
+/backend_ordersservice/server/node_modules
+/backend_apigatewayservice/server/node_modules
 /frontend_web/node_modules
+/frontend_web/build
 
 

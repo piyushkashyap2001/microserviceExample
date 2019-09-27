@@ -21,7 +21,7 @@ export default class EditBook extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:4545/book/' + this.props.match.params.id)
+    axios.get(process.env.BOOKSERVICE + '/book/' + this.props.match.params.id)
       .then(response => {
         this.setState({
           title: response.data.title,
@@ -74,7 +74,7 @@ export default class EditBook extends Component {
 
     console.log(book);
 
-    axios.put('http://localhost:4545/book/' + this.props.match.params.id, book)
+    axios.put(process.env.BOOKSERVICE + '/book/' + this.props.match.params.id, book)
       .then(res => console.log(res.data));
 
     window.location = '/book';

@@ -24,7 +24,7 @@ export default class CreateOrder extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5555/customers/')
+    axios.get(process.env.CUSTOMERSERVICE + '/customers/')
       .then(response => {
         if (response.data.length > 0) {
           this.setState({
@@ -37,7 +37,7 @@ export default class CreateOrder extends Component {
         console.log(error);
       })
 
-    axios.get('http://localhost:4545/books/')
+    axios.get(process.env.BOOKSERVICE + '/books/')
       .then(response => {
         if (response.data.length > 0) {
           this.setState({
@@ -88,7 +88,7 @@ export default class CreateOrder extends Component {
 
     console.log('order to be sent ==> ' + order);
 
-    axios.post('http://localhost:7777/order/', order)
+    axios.post(process.env.ORDERSERVICE + '/order/', order)
       .then(res => console.log(res.data));
 
     window.location = '/';

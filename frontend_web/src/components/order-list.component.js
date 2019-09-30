@@ -25,7 +25,7 @@ export default class OrderList extends Component {
   //'http://localhost:6000/orders/
   //process.env.ORDERSERVICE + '/orders/'
   componentWillMount() {
-    axios.get('http://localhost:6000/orders/')
+    axios.get(process.env.REACT_APP_API_GATEWAY_URL + '/orders/')
       .then(response => {
         this.setState({ orders: response.data })
       })
@@ -35,7 +35,7 @@ export default class OrderList extends Component {
   }
 
   deleteOrder(id) {
-    axios.delete(process.env.ORDERSERVICE + '/order/' + id)
+    axios.delete(process.env.REACT_APP_API_GATEWAY_URL + '/order/' + id)
       .then(response => { console.log(response.data) });
 
     this.setState({

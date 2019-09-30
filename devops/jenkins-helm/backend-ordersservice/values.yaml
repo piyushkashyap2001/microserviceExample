@@ -1,0 +1,44 @@
+# Default values for order service.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+---
+replicaCount: 1
+
+image:
+  repository: library/order
+  tag: latest
+  pullPolicy: Never
+
+env:
+  MONGO_HOST: mongodb-local
+  MONGO_PORT: 27017
+  DB_NAME: Order
+  USER_NAME: orderUser
+
+envSecrets:
+  PASSWORD: mongodb-order-local
+
+container:
+  port: 6000
+
+service:
+  type: ClusterIP
+  port: 6000
+  externalIPs: []
+
+ingress:
+  create: false
+
+resources:
+  limits:
+    cpu: 50m
+    memory: 128Mi
+  requests:
+    cpu: 10m
+    memory: 32Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

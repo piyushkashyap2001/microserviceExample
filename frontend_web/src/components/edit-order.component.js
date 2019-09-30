@@ -24,7 +24,7 @@ export default class EditOrder extends Component {
   }
 
   componentDidMount() {
-    axios.get(process.env.ORDERSERVICE + '/order/' + this.props.match.params.id)
+    axios.get(process.env.REACT_APP_API_GATEWAY_URL + '/order/' + this.props.match.params.id)
       .then(response => {
         this.setState({
           customername: response.data.customerName,
@@ -37,7 +37,7 @@ export default class EditOrder extends Component {
         console.log(error);
       })
 
-    axios.get(process.env.CUSTOMERSERVICE + '/customers/')
+    axios.get(process.env.REACT_APP_API_GATEWAY_URL + '/customers/')
       .then(response => {
         if (response.data.length > 0) {
           this.setState({
@@ -49,7 +49,7 @@ export default class EditOrder extends Component {
         console.log(error);
       })
 
-    axios.get(process.env.BOOKSERVICE + '/books/')
+    axios.get(process.env.REACT_APP_API_GATEWAY_URL + '/books/')
       .then(response => {
         if (response.data.length > 0) {
           this.setState({
@@ -100,10 +100,11 @@ export default class EditOrder extends Component {
 
     console.log('this is updated order' + order);
 
-    axios.put(process.env.ORDERSERVICE + '/order/' + this.props.match.params.id, order)
-      .then(res => console.log(res.data));
-
-    window.location = '/';
+    axios.put(process.env.REACT_APP_API_GATEWAY_URL + '/order/' + this.props.match.params.id, order)
+      .then(res => {
+        console.log(res.data);
+        window.location = '/';
+      });
   }
 
   render() {

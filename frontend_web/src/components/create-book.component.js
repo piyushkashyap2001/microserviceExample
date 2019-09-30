@@ -73,10 +73,11 @@ export default class CreateBook extends Component {
 
     console.log(book);
 
-    axios.post(process.env.BOOKSERVICE + '/book', book)
-      .then(res => console.log('THis is book created ==>' + res.data));
-
-    window.location = '/book';
+    axios.post(process.env.REACT_APP_API_GATEWAY_URL + '/book', book)
+      .then(res => {
+        console.log('book created ==>' + res.data);
+        window.location = '/book';
+      });
   }
 
   render() {

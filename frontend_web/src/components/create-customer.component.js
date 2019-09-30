@@ -44,15 +44,17 @@ export default class CreateCustomer extends Component {
 
     console.log(customer);
 
-    axios.post(process.env.CUSTOMERSERVICE + '/customer/', customer)
-      .then(res => console.log(res.data));
+    axios.post(process.env.REACT_APP_API_GATEWAY_URL + '/customer/', customer)
+      .then(res => {
+        console.log(res.data);
+        window.location = '/customer';
+      });
 
     this.setState({
       customername: '',
       age: '',
       address: ''
     })
-    window.location = '/customer';
   }
 
   render() {

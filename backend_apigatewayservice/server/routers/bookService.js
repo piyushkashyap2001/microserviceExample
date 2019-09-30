@@ -30,7 +30,7 @@ router.delete('/book/:id', (req, res) => {
 })
 
 router.put('/book/:id', (req, res) => {
-  api.put(req.path).then(resp => {
+  api.put(req.path, req.body).then(resp => {
     res.send(resp.data)
   })
 })

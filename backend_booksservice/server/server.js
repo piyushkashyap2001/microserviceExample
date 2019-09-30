@@ -35,12 +35,11 @@ mongoose.connect(dbURI, (err) => {
 });
 
 app.get('/', (req, res) => {
-    res.send('this is our main endpoint');
+    res.send('this is book main endpoint');
 });
 
 app.post('/book', (req, res) => {
-    console.log(req.body);
-    res.send('Testing our book route');
+    console.log('creating new book ==>' + req);
     var newBook = {
         title: req.body.title,
         author: req.body.author,
@@ -58,6 +57,7 @@ app.post('/book', (req, res) => {
 });
 
 app.get('/books', (req, res) => {
+    console.log('getting all books ==>' + req);
     Book.find().then((books) => {
         console.log(books)
         res.json(books)
@@ -67,6 +67,7 @@ app.get('/books', (req, res) => {
 });
 
 app.get('/book/:id', (req, res) => {
+    console.log('get particular book ==>' + req);
     Book.findById(req.params.id).then((book) => {
         if (book) {
             res.json(book)
@@ -79,6 +80,7 @@ app.get('/book/:id', (req, res) => {
 })
 
 app.delete('/book/:id', (req, res) => {
+    console.log('delete a book ==>' + req);
     Book.findOneAndRemove(req.params.id).then(() => {
         res.send('book deleted');
     }).catch(err => {
@@ -87,6 +89,7 @@ app.delete('/book/:id', (req, res) => {
 })
 
 app.put('/book/:id', (req, res) => {
+    console.log('update a book ==>' + req);
     Book.findById(req.params.id).then((book) => {
         book.title = req.body.title,
             book.author = req.body.author,
@@ -105,5 +108,5 @@ app.get("/healthcheck", (req, res) => {
 });
 
 app.listen(4000, () => {
-    console.log("up and running ! -- THis is book service");
+    console.log("up and running ! -- book service");
 });

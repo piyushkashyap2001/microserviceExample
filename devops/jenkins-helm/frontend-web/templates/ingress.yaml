@@ -1,0 +1,20 @@
+{{- if .Values.ingress.create }}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ template "app.name" . }}
+  namespace: {{ .Release.Namespace }}
+  {{- if .Values.ingress.annotations }}
+  annotations:
+{{ toYaml .Values.ingress.annotations | indent 4}}
+  {{- end }}
+spec:
+  {{- if .Values.ingress.rules }}
+  rules:
+{{ toYaml .Values.ingress.rules | indent 4}}
+  {{- end }}
+  {{- if .Values.ingress.tls }}
+  tls:
+{{ toYaml .Values.ingress.tls | indent 4 }}
+  {{- end }}
+{{- end }}

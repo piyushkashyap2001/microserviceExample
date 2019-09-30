@@ -35,6 +35,7 @@ require('./Order')
 const Order = mongoose.model('Order');
 
 app.post('/order', (req, res) => {
+    console.log('creating new order ==>' + req);
     var newOrder = {
         customerName: req.body.customername,
         bookTitle: req.body.booktitle,
@@ -51,6 +52,7 @@ app.post('/order', (req, res) => {
     });
 });
 app.get('/orders', (req, res) => {
+    console.log('get all orders ==>' + req);
     Order.find().then((books) => {
         res.json(books);
     }).catch(err => {
@@ -59,6 +61,7 @@ app.get('/orders', (req, res) => {
 });
 
 app.get('/order/:id', (req, res) => {
+    console.log('get a order ==>' + req);
     Order.findById(req.params.id).then((order) => {
         if (order) {
             // axios.get('http://localhost:5555/customer/' + order.CustomerID)
@@ -83,6 +86,7 @@ app.get('/order/:id', (req, res) => {
 });
 
 app.delete('/order/:id', (req, res) => {
+    console.log('delete an order ==>' + req);
     Order.findOneAndRemove(req.params.id).then(() => {
         res.send('Order deleted');
     }).catch(err => {
@@ -90,7 +94,7 @@ app.delete('/order/:id', (req, res) => {
     });
 })
 app.put('/order/:id', (req, res) => {
-    console.log('put called ==> ' + req.body.booktitle);
+    console.log('update an order ==>' + req);
     Order.findById(req.params.id).then((order) => {
         order.customerName = req.body.customername,
             order.bookTitle = req.body.booktitle,

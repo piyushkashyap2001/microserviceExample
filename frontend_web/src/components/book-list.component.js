@@ -25,7 +25,7 @@ export default class BookList extends Component {
 
   //'http://localhost:4545/books/'
   componentDidMount() {
-    axios.get(process.env.BOOKSERVICE + '/books/')
+    axios.get(process.env.REACT_APP_API_GATEWAY_URL + '/books/')
       .then(response => {
         this.setState({ books: response.data })
       })
@@ -35,7 +35,7 @@ export default class BookList extends Component {
   }
 
   deleteBook(id) {
-    axios.delete(process.env.BOOKSERVICE + '/book/' + id)
+    axios.delete(process.env.REACT_APP_API_GATEWAY_URL + '/book/' + id)
       .then(response => { console.log(response.data) });
 
     this.setState({

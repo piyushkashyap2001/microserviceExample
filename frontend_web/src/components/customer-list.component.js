@@ -23,7 +23,7 @@ export default class CustomerList extends Component {
   }
 
   componentDidMount() {
-    axios.get(process.env.CUSTOMERSERVICE + '/customers/')
+    axios.get(process.env.REACT_APP_API_GATEWAY_URL + '/customers/')
       .then(response => {
         this.setState({ customers: response.data })
       })
@@ -33,7 +33,7 @@ export default class CustomerList extends Component {
   }
 
   deleteCustomer(id) {
-    axios.delete(process.env.CUSTOMERSERVICE + '/customer/' + id)
+    axios.delete(process.env.REACT_APP_API_GATEWAY_URL + '/customer/' + id)
       .then(response => { console.log(response.data) });
 
     this.setState({

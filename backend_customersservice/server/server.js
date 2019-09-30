@@ -34,6 +34,7 @@ mongoose.connect(dbURI, (err) => {
     }
 });
 app.post('/customer', (req, res) => {
+    console.log('creating new customer ==>' + req);
     var newCustomer = {
         name: req.body.name,
         age: req.body.age,
@@ -51,6 +52,7 @@ app.post('/customer', (req, res) => {
 });
 
 app.get('/customers', (req, res) => {
+    console.log('getting all customers ==>' + req);
     Customer.find().then((customers) => {
         console.log(customers)
         res.json(customers)
@@ -60,6 +62,7 @@ app.get('/customers', (req, res) => {
 });
 
 app.get('/customer/:id', (req, res) => {
+    console.log('get a particular customer ==>' + req);
     Customer.findById(req.params.id).then((customer) => {
         if (customer) {
             res.json(customer)
@@ -72,6 +75,7 @@ app.get('/customer/:id', (req, res) => {
 })
 
 app.delete('/customer/:id', (req, res) => {
+    console.log('delete a customer ==>' + req);
     Customer.findOneAndRemove(req.params.id).then(() => {
         res.send('customer deleted');
     }).catch(err => {
@@ -80,6 +84,7 @@ app.delete('/customer/:id', (req, res) => {
 })
 
 app.put('/customer/:id', (req, res) => {
+    console.log('update a customer ==>' + req);
     Customer.findById(req.params.id).then((customer) => {
         customer.name = req.body.customername,
             customer.age = req.body.age,

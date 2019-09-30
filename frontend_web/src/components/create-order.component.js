@@ -24,7 +24,7 @@ export default class CreateOrder extends Component {
   }
 
   componentDidMount() {
-    axios.get(process.env.CUSTOMERSERVICE + '/customers/')
+    axios.get(process.env.REACT_APP_API_GATEWAY_URL + '/customers/')
       .then(response => {
         if (response.data.length > 0) {
           this.setState({
@@ -37,7 +37,7 @@ export default class CreateOrder extends Component {
         console.log(error);
       })
 
-    axios.get(process.env.BOOKSERVICE + '/books/')
+    axios.get(process.env.REACT_APP_API_GATEWAY_URL + '/books/')
       .then(response => {
         if (response.data.length > 0) {
           this.setState({
@@ -88,10 +88,11 @@ export default class CreateOrder extends Component {
 
     console.log('order to be sent ==> ' + order);
 
-    axios.post(process.env.ORDERSERVICE + '/order/', order)
-      .then(res => console.log(res.data));
-
-    window.location = '/';
+    axios.post(process.env.REACT_APP_API_GATEWAY_URL + '/order/', order)
+      .then(res => {
+        console.log(res.data);
+        window.location = '/';
+      });
   }
 
   render() {

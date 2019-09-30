@@ -31,7 +31,7 @@ router.delete('/order/:id', (req, res) => {
 })
 
 router.put('/order/:id', (req, res) => {
-  api.put(req.path).then(resp => {
+  api.put(req.path, req.body).then(resp => {
     res.send(resp.data)
   })
 })
